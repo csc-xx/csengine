@@ -3,6 +3,8 @@
 //Any assbags who write in here, ADD GORRAM COMMENTS. I want to know how to use it X_X
 // Version tag: 2.0-0
 class interface {
+    //Includes
+    require('rc.conf');
     //Psudo-Protocols
     CONST FILE=0; //File protocol support
     CONST SYS=1; //System calls
@@ -14,13 +16,16 @@ class interface {
     CONST TCP=5; //TCP/IP
     CONST UDP=6; //[cSc] Ill probably never do this
 
-    public function __construct($ifaceType, $location, $protocol=4, $version='2.0') { //IPC Protocol(Interprocess Communication)
+    public function __construct($ifaceType, $location, $protocol=4, $version='2.0') { //IPC Protocol(Interprocess Communication) by default
             //Lets turn these into special things
             //Variables
             $this->interface = (int)$ifaceType;
             $this->location = (string)$location;
             $this->version = (float)$version;
             $this->proto = (int)$protocol;
+            //Allow sys vars to be retrieved
+            $this->svi = new interface(SYS, null);
+
             //Start up the logger
             $this->ipLog = new logger();
 
@@ -28,11 +33,11 @@ class interface {
             switch($this->interface) {
                 case interface::FILE:
                     fopen($this->location, 'ab');
-                    $this->iplog->logger(MINOR, "$this->location opened."); //TODO: Add date & time logging
+                    $this->iplog->logger(INFO, "$this->location opened."); //TODO: Add date & time logging
                     break;
                 case interface::SYS:
-                    //todo, now just spit out a log error and break
-                    $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
+                    $this->sysInterface = new si();
+                    $this->ipLog->logger(INFO, "System interface accessed"); //TODO: Date&time&'user'
                     break;
                 case interface::API:
                     //todo, now just spit out a log error and break
@@ -51,6 +56,10 @@ class interface {
                     $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
                     break;
             }
+    }
+    public function getUniqueID($type) {
+        $this->type = (int)$type;
+        $this->uidList = fopen($this->svi->retrieveValue('udil'), 'ab');
     }
 }
 ?>
