@@ -4,7 +4,7 @@
 // Version tag: 2.0-0
 class interface {
     //Includes
-    require('rc.conf');
+    require('rc.conf'); //Provides si();
     //Psudo-Protocols
     CONST FILE=0; //File protocol support
     CONST SYS=1; //System calls
@@ -33,11 +33,12 @@ class interface {
             switch($this->interface) {
                 case interface::FILE:
                     fopen($this->location, 'ab');
-                    $this->iplog->logger(INFO, "$this->location opened."); //TODO: Add date & time logging
+                    $this->iplog->logger(NOTICE, "$this->location opened."); //TODO: Add date & time logging
                     break;
                 case interface::SYS:
                     $this->sysInterface = new si(); //Pop the system interface open
-                    $this->ipLog->logger(INFO, "System interface accessed"); //TODO: Date&time&'user'
+                    $this->ipLog->logger(NOTICE, "System interface accessed"); //TODO: Date&time&'user'
+                    $this->sysInterface->writeValue('active', true);
                     break;
                 case interface::API:
                     //todo, now just spit out a log error and break
@@ -77,6 +78,41 @@ class interface {
             } else {
                 return $this->uid; //else return the uid
             }
+        }
+    }
+}
+class logger {
+    CONST NORMAL=0;
+    CONST WARNING=1;
+    CONST NOTICE=2;
+    CONST ERROR=3;
+
+    public function __construct($type, $strng) {
+        //We only need to use a system information pipe...
+        if(!$this->sysInterface->retrieveValue('active') == true) {
+            $this->svi = new interface(SYS, null); //Its not open, pop one
+        }
+        switch($type) {
+            case logger::NORMAL:
+                $this->logfile = fopen($this->svi->getValue('logfile'), 'ab');
+                fwrite($this->logfile, "NORMAL: $strng");
+                fclose($this->logfile);
+                break;
+            case logger::WARNING:
+                $this->logfile = fopen($this->svi->getValue('logfile'), 'ab');
+                fwrite($this->logfile, "WARNING: $strng");
+                fclose($this->logfile);
+                break;
+            case logger::NOTICE:
+                $this->logfile = fopen($this->svi->getValue('logfile'), 'ab');
+                fwrite($this->logfile, "NOTICE: $strng");
+                fclose($this->logfile);
+                break;
+            case logger::ERROR:
+                $this->logfile = fopen($this->svi->getValue('logfile'), 'ab');
+                fwrite($this->logfile, "ERROR: $strng");
+                fclose($this->logfile);
+                break;
         }
     }
 }
