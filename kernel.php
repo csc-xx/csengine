@@ -36,7 +36,7 @@ class interface {
                     $this->iplog->logger(INFO, "$this->location opened."); //TODO: Add date & time logging
                     break;
                 case interface::SYS:
-                    $this->sysInterface = new si();
+                    $this->sysInterface = new si(); //Pop the system interface open
                     $this->ipLog->logger(INFO, "System interface accessed"); //TODO: Date&time&'user'
                     break;
                 case interface::API:
@@ -59,7 +59,25 @@ class interface {
     }
     public function getUniqueID($type) {
         $this->type = (int)$type;
-        $this->uidList = fopen($this->svi->retrieveValue('udil'), 'ab');
+        $this->uidList = fopen($this->svi->retrieveValue('udil'), 'rb'); //use the already initialized sysinfo pipe
+        while(!$this->uuidTaken) { //start up a loop to fish out an unused uid
+            $this->uid++; //increase the id at the start of the loop
+            while(!feof($this->uuidList)) {
+                $this->uuidList = explode('/n', trim(fgets($this->uidList, 4096))); //???
+                if($this->uuidList[0] == $this->uid) {
+                    $this->uidTaken == true; //if its taken, set the var to true
+                }
+                if(!$this->uuidList[0] == $this->uid) {
+                    $this->uidTaken == false; //if not, set it to false
+                }
+            }
+            if($this->uidTaken == true) {
+                $this->ipLog->logger(ERROR, "Couldn't find a proper unique id"); //if its taken and the loop is done, log an die
+                die("Cound't Find a proper unique id!");
+            } else {
+                return $this->uid; //else return the uid
+            }
+        }
     }
 }
 ?>
