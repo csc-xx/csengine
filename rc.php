@@ -13,4 +13,17 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
+class si {
+    private $vi = array(
+        "logfile" => "data/logs/system.log",
+        "udil" => "data/system/udil.list",
+        "active" => false,
+        "hostname" => "myhost",
+        "datadir" => "./data"
+    );
+    public function __construct() {
+        require('kernel.php'); //logging
+        $this->syslog = new logger(); //We need log access
+    } //Done for now heh
+}
 ?>
