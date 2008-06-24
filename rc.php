@@ -23,7 +23,7 @@ class si {
     );
     public function __construct() {
         require('kernel.php'); //logging
-        $this->syslog = new logger(); //We need log access
+        $this->sysLog = new logger(); //We need log access
     } //Done for now heh
 }
 ?>
