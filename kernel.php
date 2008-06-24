@@ -42,34 +42,34 @@ class interface {
             $this->svi = new interface(SYS, null);
 
             //Start up the logger
-            $this->ipLog = new logger();
+            $this->ifLog = new logger();
 
             //Code
             switch($this->interface) {
                 case interface::FILE:
                     fopen($this->location, 'ab');
-                    $this->iplog->logger(NOTICE, "$this->location opened."); //TODO: Add date & time logging
+                    $this->ifLog->logger(NOTICE, "$this->location opened."); //TODO: Add date & time logging
                     break;
                 case interface::SYS:
                     $this->sysInterface = new si(); //Pop the system interface open
-                    $this->ipLog->logger(NOTICE, "System interface accessed"); //TODO: Date&time&'user'
+                    $this->ifLog->logger(NOTICE, "System interface accessed"); //TODO: Date&time&'user'
                     $this->sysInterface->writeValue('active', true);
                     break;
                 case interface::API:
                     //todo, now just spit out a log error and break
-                    $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
+                    $this->ifLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
                     break;
                 case interface::ENGINE:
                     //todo, now just spit out a log error and break
-                    $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
+                    $this->ifLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
                     break;
                 case interface::IPC:
                     //todo, now just spit out a log error and break
-                    $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
+                    $this->ifLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
                     break;
                 case interface::TCP:
                     //todo, now just spit out a log error and break
-                    $this->ipLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
+                    $this->ifLog->logger(WARNING, "User attempted to access stuff that doesn't exist!");
                     break;
             }
     }
@@ -88,7 +88,7 @@ class interface {
                 }
             }
             if($this->uidTaken == true) {
-                $this->ipLog->logger(ERROR, "Couldn't find a proper unique id"); //if its taken and the loop is done, log an die
+                $this->ifLog->logger(ERROR, "Couldn't find a proper unique id"); //if its taken and the loop is done, log an die
                 die("Cound't Find a proper unique id!");
             } else {
                 return $this->uid; //else return the uid
