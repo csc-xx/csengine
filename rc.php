@@ -23,7 +23,12 @@ class si {
     );
     public function __construct() {
         require('kernel.php'); //logging
+        $this->vi = (array)$vi;
         $this->sysLog = new logger(); //We need log access
-    } //Done for now heh
+    }
+    public function retrieveValue($value) {
+        $this->value = (string)$value;
+        return $vi["$this->value"];
+    }
 }
 ?>
