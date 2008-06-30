@@ -27,7 +27,14 @@ class si {
         $this->sysLog = new logger(); //We need log access
     }
     public function retrieveValue($value) {
-        $this->value = (string)$value;
+        if($value == true || $value == false || $value == True || $value == False || $value == FALSE || $value == TRUE) {
+            $this->value = (bool)$value;
+        }
+        if($value == "" || $value == '') {
+            $this->value = (string)$value;
+        } else {
+            $this->value = (string)$value;
+        }
         return $vi["$this->value"];
     }
 }
