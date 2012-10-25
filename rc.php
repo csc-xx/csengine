@@ -13,29 +13,29 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
-class si {
-    private $vi = array(
+class csengine_rc_interface {
+    private $csengine_value_info = array(
         "logfile" => "data/logs/system.log",
-        "udil" => "data/system/udil.list",
+        "uid_list" => "data/system/uid.list",
         "active" => false,
         "hostname" => "myhost",
         "datadir" => "./data"
     );
     public function __construct() {
         require('kernel.php'); //logging
-        $this->vi = (array)$vi;
-        $this->sysLog = new logger(); //We need log access
+        $this->csengine_rc_value_array = (array)$csengine_value_info;
+        $this->csengine_rc_log = new logger(); //We need log access
     }
-    public function retrieveValue($value) {
-        if($value == true || $value == false || $value == True || $value == False || $value == FALSE || $value == TRUE) {
-            $this->value = (bool)$value;
+    public function csengine_rc_retrieveValue($csengine_rc_value) {
+        if($csengine_rc_value == true || $csengine_rc_value == false || $csengine_rc_value == True || $csengine_rc_value == False || $csengine_rc_value == FALSE || $csengine_rc_value == TRUE) {
+            $this->csengine_rc_value = (bool)$csengine_rc_value;
         }
-        if($value == "" || $value == '') {
-            $this->value = (string)$value;
+        if($csengine_rc_value == "" || $csengine_rc_value == '') {
+            $this->csengine_rc_value = (string)$csengine_rc_value;
         } else {
-            $this->value = (string)$value;
+            $this->csengine_rc_value = (string)$csengine_rc_value;
         }
-        return $vi["$this->value"];
+        return $csengine_value_array["$this->csengine_rc_value"];
     }
 }
 ?>
