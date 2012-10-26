@@ -129,7 +129,8 @@ class csengine_log {
                 fwrite($this->csengine_logfile, "ERROR: $strng");
                 fclose($this->csengine_logfile);
                 break;
-                else return FALSE;
+
+                return FALSE; //Hopefully if none of these are able to run properly and it does not break as expected, it will return the function as 'false'
         }
     }
 }
