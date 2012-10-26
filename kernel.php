@@ -17,9 +17,10 @@ along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
 //The csengine kernel. Holds all low-level shit
 //Any assbags who write in here, ADD GORRAM COMMENTS. I want to know how to use it X_X
 // Version tag: 2.0-0
+
+//Includes
+require('rc.php'); //Provides csengine_rc_interface();
 class csengine_interface {
-    //Includes
-    require('rc.php'); //Provides si();
     //Psudo-Protocols
     CONST CSENGINE_PROTOCOL_FILE=0; //File protocol support
     CONST CSENGINE_PROTOCOL_SYS=1; //System calls
@@ -128,6 +129,7 @@ class csengine_log {
                 fwrite($this->csengine_logfile, "ERROR: $strng");
                 fclose($this->csengine_logfile);
                 break;
+                else return FALSE;
         }
     }
 }
