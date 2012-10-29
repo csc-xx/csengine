@@ -22,6 +22,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Tests/kernel/csengine_interface.php" />
+		<Unit filename="Tests/kernel/csengine_log.php" />
+		<Unit filename="Tests/rc/csengine_rc_interface.php" />
 		<Unit filename="kernel.php" />
 		<Unit filename="rc.php" />
 		<Extensions>

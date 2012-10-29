@@ -110,7 +110,7 @@ class csengine_log {
         }
         switch($type) {
             case csengine_log::CSENGINE_NORMAL:
-                $this->csengine_csengine_logfile = fopen($this->csengine_rc_system_pipe->csengine_rc_retrieveValue('csengine_log'), 'ab');
+                $this->csengine_csengine_logfile = fopen($this->csengine_rc_system_pipe->csengine_rc_retrieveValue('csengine_logfile'), 'ab');
                 fwrite($this->csengine_logfile, "NORMAL: $strng");
                 fclose($this->csengine_logfile);
                 break;
@@ -129,8 +129,6 @@ class csengine_log {
                 fwrite($this->csengine_logfile, "ERROR: $strng");
                 fclose($this->csengine_logfile);
                 break;
-
-                return FALSE; //Hopefully if none of these are able to run properly and it does not break as expected, it will return the function as 'false'
         }
     }
 }
