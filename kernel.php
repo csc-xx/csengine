@@ -19,7 +19,7 @@ along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
 // Version tag: 2.0-0
 
 //Includes
-require('rc.php'); //Provides csengine_rc_interface();
+require_once('rc.php'); //Provides csengine_rc_interface();
 class csengine_interface {
     //Psudo-Protocols
     CONST CSENGINE_PROTOCOL_FILE=0; //File protocol support

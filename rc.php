@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
 
 //Includes
-require('kernel.php'); //logging
+require_once('kernel.php'); //logging
 class csengine_rc_interface {
     private $csengine_value_info = array(
         "csengine_logfile" => "data/logs/system.log",
