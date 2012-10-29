@@ -18,7 +18,7 @@ along with CSEngine.  If not, see <http://www.gnu.org/licenses/>. */
 require('kernel.php'); //logging
 class csengine_rc_interface {
     private $csengine_value_info = array(
-        "csengine_logfile" => "data/logs/system.log",
+        "logfile" => "data/logs/system.log",
         "uid_list" => "data/system/uid.list",
         "active" => false,
         "hostname" => "myhost",
