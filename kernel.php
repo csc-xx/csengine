@@ -40,7 +40,7 @@ class csengine_interface {
             $this->csengine_kernel_version = (float)$csengine_input_version;
             $this->csengine_kernel_protocol = (int)$csengine_input_protocol;
             //Allow sys vars to be retrieved
-            $this->csengine_rc_system_variables = new csengine_interface(SYS, null);
+            $this->csengine_rc_system_variables = new csengine_interface(CSENGINE_PROTOCOL_SYS, "Kernel");
 
             //Start up the csengine_log
             $this->csengine_kernel_log = new csengine_log();
@@ -106,7 +106,7 @@ class csengine_log {
     public function __construct($type, $strng) {
         //We only need to use a system information pipe...
         if(!$this->csengine_rc_system_pipe->csengine_rc_retrieveValue('active') == true) {
-            $this->csengine_rc_system_pipe = new csengine_interface(SYS, null); //Its not open, pop one
+            $this->csengine_rc_system_pipe = new csengine_interface(CSENGINE_PROTOCOL_SYS, null); //Its not open, pop one
         }
         switch($type) {
             case csengine_log::CSENGINE_NORMAL:
